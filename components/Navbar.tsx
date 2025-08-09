@@ -45,7 +45,7 @@ export default function Navbar() {
     <header className={`${headerBase} ${headerStyle} ${invertTop ? "text-white" : ""}`}>
       <nav className="container-app flex items-center justify-between h-16">
         <Link href="/" className="flex items-center">
-          <Logo force={invertTop ? "light" : undefined} />
+          <Logo force={invertTop ? "dark" : undefined} />
         </Link>
 
         {/* Desktop */}
