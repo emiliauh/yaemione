@@ -19,7 +19,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 16, scale: 0.98 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
           transition={{ duration: 0.6, ease: 'easeOut' }}
-          className="rounded-[2rem] border border-white/10 bg-white/5 backdrop-blur-xl shadow-[0_20px_60px_rgba(0,0,0,0.35)] overflow-hidden"
+          className="rounded-[2rem] border backdrop-blur-xl overflow-hidden shadow-[0_20px_60px_rgba(0,0,0,0.20)] bg-white/80 border-gray-200 dark:bg-white/5 dark:border-white/10"
         >
           {/* Soft top gradient sheen */}
           <div className="h-2 bg-gradient-to-r from-transparent via-white/20 to-transparent opacity-30" />
@@ -31,7 +31,7 @@ export default function Hero() {
                 <span className="relative inline-block">
                   <span className="relative z-10 text-brand-300 drop-shadow-[0_0_18px_rgba(72,187,255,0.55)]">network</span>{" "}
                 </span>
-                <span>infrastructure.</span>
+                <span>&nbsp;infrastructure.</span>
               </h1>
 
               <p className="mt-5 text-lg text-gray-300">

@@ -1,13 +1,13 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="140" height="32" viewBox="0 0 700 160">
   <defs>
     <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#0b79db"></stop>
-      <stop offset="100%" stop-color="#49b8ff"></stop>
+      <stop offset="0%" stop-color="#0b79db"/>
+      <stop offset="100%" stop-color="#49b8ff"/>
     </linearGradient>
   </defs>
   <g fill="url(#g)">
-    <path d="M40 40 L80 80 L40 120 L0 80 Z" opacity="0.9"></path>
-    <circle cx="100" cy="80" r="14" opacity="0.9"></circle>
+    <path d="M40 40 L80 80 L40 120 L0 80 Z" opacity="0.9"/>
+    <circle cx="100" cy="80" r="14" opacity="0.9"/>
   </g>
   <text x="140" y="105" font-family="Inter, ui-sans-serif, system-ui" font-size="78" font-weight="700" fill="#0d3f73" letter-spacing="2">
     Yaemione

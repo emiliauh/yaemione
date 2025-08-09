@@ -30,7 +30,7 @@ export default function Navbar() {
   }, []);
 
   return (
-    <header className={`fixed top-0 inset-x-0 z-50 transition-all ${scrolled ? "backdrop-blur bg-gray-950/70 border-b border-white/10" : ""}`}>
+    <header className={`fixed top-0 inset-x-0 z-50 transition-all ${scrolled ? "backdrop-blur bg-white/70 dark:bg-gray-950/70 border-b border-black/10 dark:border-white/10" : ""}` }>
       <nav className="container-app flex items-center justify-between h-16">
         <Link href="/" className="flex items-center">
           <Logo />

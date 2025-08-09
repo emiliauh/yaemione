@@ -2,39 +2,21 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --bg: 17 24 39;
-  --fg: 243 244 246;
-}
+html, body { @apply h-full scroll-smooth; }
 
-html, body {
-  @apply h-full scroll-smooth;
-}
+/* Base theme defaults (light) */
+body { @apply bg-gray-50 text-gray-900 antialiased; }
 
-body {
-  @apply bg-gray-950 text-gray-100 antialiased;
-}
+/* Dark mode applied by next-themes on <html> */
+html.dark body { @apply bg-gray-950 text-gray-100; }
 
-.light body, body.light {
-  @apply bg-white text-gray-900;
-}
+.container-app { @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8; }
+.section { @apply py-20; }
 
-.container-app {
-  @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
-}
+/* Card surface that adapts to theme */
+.card { @apply rounded-2xl border shadow-soft; }
+html.dark .card { @apply border-white/10 bg-white/5 backdrop-blur; }
+html.light .card { @apply border-gray-200 bg-white; }
 
-.section {
-  @apply py-20;
-}
-
-.card {
-  @apply rounded-2xl border border-white/10 bg-white/5 backdrop-blur shadow-soft;
-}
-
-.card-light {
-  @apply border-gray-200 bg-white;
-}
-
-a.underline-link {
-  @apply underline underline-offset-4 decoration-white/30 hover:decoration-brand-400;
-}
+a.underline-link { @apply underline underline-offset-4 decoration-white/30 hover:decoration-brand-400; }
+html.light a.underline-link { @apply decoration-gray-400 hover:decoration-brand-600; }
