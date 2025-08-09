@@ -31,3 +31,7 @@ html.light .border-white\/20 { @apply border-slate-200; }
 /* Links */
 a.underline-link { @apply underline underline-offset-4 decoration-white/30 hover:decoration-brand-400; }
 html.light a.underline-link { @apply decoration-slate-400 hover:decoration-brand-600; }
+
+/* Helpers for better mobile headings */
+.text-balance { text-wrap: balance; }
+.hyphens-auto { hyphens: auto; }
