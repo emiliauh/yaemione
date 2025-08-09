@@ -1,24 +1,18 @@
-import "./globals.css";
-import { ThemeProvider } from "next-themes";
-import type { Metadata } from "next";
+import './globals.css';
+import { Inter } from 'next/font/google';
 
-export const metadata: Metadata = {
-  title: "Yaemione — Network Infrastructure & Hosting",
-  description: "IP Transit, Dedicated Servers, VPS Hosting, and Network Solutions.",
-  metadataBase: new URL("https://yaemi.one"),
-  icons: {
-    icon: "/favicon.ico"
-  }
+const inter = Inter({ subsets: ['latin'] });
+
+export const metadata = {
+  title: 'Yaemione',
+  description: 'Network infrastructure solutions',
+  icons: { icon: '/favicon.png' },
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({ children }) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body>
-        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false}>
-          {children}
-        </ThemeProvider>
-      </body>
+    <html lang="en">
+      <body className={inter.className}>{children}</body>
     </html>
   );
 }
