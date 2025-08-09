@@ -18,7 +18,7 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 1);
+    const onScroll = () => setScrolled(window.scrollY > 10);
     onScroll();
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
@@ -35,7 +35,7 @@ export default function Navbar() {
       className={`fixed top-0 inset-x-0 z-50 transition-all ${
         scrolled
           ? "backdrop-blur bg-white/70 dark:bg-gray-950/70 border-b border-black/10 dark:border-white/10"
-          : "bg-white/60 border-b border-black/5 dark:bg-transparent dark:border-transparent"
+          : "bg-transparent border-b border-transparent"
       }`}
     >
       <nav className="container-app flex items-center justify-between h-16">

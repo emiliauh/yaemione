@@ -3,25 +3,35 @@
 export default function AnimatedBackdrop() {
   return (
     <div aria-hidden className="absolute inset-0 overflow-hidden pointer-events-none">
-      {/* Gradient base */}
-      <div className="absolute inset-0 bg-gradient-to-br from-[#0a2640] via-[#0b1220] to-black opacity-70 dark:opacity-100" />
-      {/* Animated radial glow */}
-      <div className="absolute -top-40 -left-40 w-[46rem] h-[46rem] rounded-full bg-cyan-400/25 blur-[140px] animate-pulse" />
-      <div className="absolute -bottom-48 -right-24 w-[42rem] h-[42rem] rounded-full bg-indigo-500/25 blur-[140px] animate-[pulse_6s_ease-in-out_infinite]" />
+      {/* Base radial gradient */}
+      <div className="absolute inset-0 bg-[radial-gradient(80%_60%_at_50%_0%,rgba(13,61,99,0.35),transparent_60%),linear-gradient(180deg,#0a1a2a_0%,#060c14_100%)] dark:bg-[radial-gradient(80%_60%_at_50%_0%,rgba(13,61,99,0.5),transparent_60%),linear-gradient(180deg,#06111d_0%,#000_100%)]" />
 
-      {/* Wavy SVG */}
-      <svg className="absolute -bottom-24 left-1/2 -translate-x-1/2 w-[140%] h-[300px] opacity-35" viewBox="0 0 1440 320" preserveAspectRatio="none">
+      {/* Soft diagonal color wash */}
+      <div className="absolute inset-x-[-10%] top-[-20%] h-[60%] rotate-[-6deg] bg-gradient-to-r from-[#4db0ff33] via-[#2a67ff22] to-transparent blur-[80px]" />
+
+      {/* Layered wave bands (SVG) */}
+      <svg className="absolute bottom-[-40px] left-1/2 -translate-x-1/2 w-[140%] h-[260px] opacity-70" viewBox="0 0 1440 320" preserveAspectRatio="none">
         <defs>
-          <linearGradient id="waveGradient" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0%" stopColor="#49b8ff"/>
-            <stop offset="100%" stopColor="#0b79db"/>
+          <linearGradient id="band1" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stopColor="#3aa9ff" stopOpacity="0.35" />
+            <stop offset="100%" stopColor="#1b4bbf" stopOpacity="0.15" />
+          </linearGradient>
+          <linearGradient id="band2" x1="1" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor="#2e7bf2" stopOpacity="0.25" />
+            <stop offset="100%" stopColor="#0b79db" stopOpacity="0.15" />
           </linearGradient>
         </defs>
-        <path fill="url(#waveGradient)">
-          <animate attributeName="d" dur="12s" repeatCount="indefinite"
-            values="M0,192L80,170.7C160,149,320,107,480,101.3C640,96,800,128,960,144C1120,160,1280,160,1360,160L1440,160L1440,320L1360,320C1280,320,1120,320,960,320C800,320,640,320,480,320C320,320,160,320,80,320L0,320Z;
-                    M0,224L80,197.3C160,171,320,117,480,106.7C640,96,800,128,960,149.3C1120,171,1280,181,1360,181.3L1440,192L1440,320L1360,320C1280,320,1120,320,960,320C800,320,640,320,480,320C320,320,160,320,80,320L0,320Z;
-                    M0,192L80,170.7C160,149,320,107,480,101.3C640,96,800,128,960,144C1120,160,1280,160,1360,160L1440,160L1440,320L1360,320C1280,320,1120,320,960,320C800,320,640,320,480,320C320,320,160,320,80,320L0,320Z" />
+        <path fill="url(#band1)">
+          <animate attributeName="d" dur="16s" repeatCount="indefinite"
+            values="M0,192L96,186.7C192,181,384,171,576,170.7C768,171,960,181,1152,186.7C1344,192,1536,192,1728,186.7L1728,320L0,320Z;
+                    M0,192L96,181.3C192,171,384,149,576,149.3C768,149,960,171,1152,181.3C1344,192,1536,192,1728,181.3L1728,320L0,320Z;
+                    M0,192L96,186.7C192,181,384,171,576,170.7C768,171,960,181,1152,186.7C1344,192,1536,192,1728,186.7L1728,320L0,320Z" />
+        </path>
+        <path fill="url(#band2)" opacity="0.8">
+          <animate attributeName="d" dur="18s" repeatCount="indefinite"
+            values="M0,224L120,213.3C240,203,480,181,720,176C960,171,1200,181,1440,186.7L1440,320L0,320Z;
+                    M0,234L120,218.3C240,203,480,171,720,165C960,160,1200,181,1440,197L1440,320L0,320Z;
+                    M0,224L120,213.3C240,203,480,181,720,176C960,171,1200,181,1440,186.7L1440,320L0,320Z" />
         </path>
       </svg>
     </div>
