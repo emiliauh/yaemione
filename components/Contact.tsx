@@ -1,34 +1,61 @@
 "use client";
 
-import { useState } from "react";
-import SuccessBanner from "./SuccessBanner";
+import { useRef, useState } from "react";
+
+const FABFORM_ENDPOINT = "https://fabform.io/f/aS8J1zs";
+
+function Banner({ kind, message, onClose }: { kind: "success" | "error"; message: string; onClose: () => void }) {
+  return (
+    <div
+      className={`mt-4 rounded-2xl border backdrop-blur px-4 py-3 text-sm flex items-start justify-between gap-3 ${
+        kind === "success"
+          ? "bg-emerald-400/10 border-emerald-400/20 text-emerald-200"
+          : "bg-red-400/10 border-red-400/20 text-red-200"
+      }`}
+    >
+      <p className="leading-relaxed">{message}</p>
+      <button
+        onClick={onClose}
+        className="shrink-0 rounded-lg px-2 py-1 border border-white/10 hover:bg-white/10 transition"
+        aria-label="Dismiss"
+      >
+        ✕
+      </button>
+    </div>
+  );
+}
 
 export default function Contact() {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [message, setMessage] = useState("");
-  const [status, setStatus] = useState<null | "ok" | "err">(null);
+  const formRef = useRef<HTMLFormElement>(null);
+  const [status, setStatus] = useState<null | "ok" | "err" | "loading">(null);
 
-  
-  const submit = async (e: React.FormEvent) => {
+  async function onSubmit(e: React.FormEvent) {
     e.preventDefault();
-    if (!name || !email || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email) || !message) {
-      setStatus("err"); return;
+    if (!formRef.current) return;
+    setStatus("loading");
+
+    const fd = new FormData(formRef.current);
+
+    // Honeypot
+    if ((fd.get("company") as string)?.trim()) {
+      setStatus("ok");
+      formRef.current.reset();
+      return;
     }
+
     try {
-      const res = await fetch("/api/support", {
+      const res = await fetch(FABFORM_ENDPOINT, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, email, message }),
+        body: fd,
+        headers: { Accept: "application/json" },
       });
       if (!res.ok) throw new Error("Request failed");
       setStatus("ok");
-      setName(""); setEmail(""); setMessage("");
-    } catch {
+      formRef.current.reset();
+    } catch (err) {
       setStatus("err");
     }
-  };
-
+  }
 
   return (
     <section id="contact" className="section">
@@ -43,34 +70,14 @@ export default function Contact() {
               <li><strong>Twitter/X:</strong> <a href="https://x.com/yaemione" className="underline-link" target="_blank" rel="noreferrer">@yaemione</a></li>
             </ul>
           </div>
-          
-<form
-            action="https://formspree.io/f/manbaerp"
-            method="POST"
-            onSubmit={async (e) => {
-              e.preventDefault();
-              const form = e.currentTarget as HTMLFormElement;
-              const fd = new FormData(form);
-              try {
-                const res = await fetch(form.action, {
-                  method: "POST",
-                  body: fd,
-                  headers: { "Accept": "application/json" },
-                });
-                if (!res.ok) throw new Error("Bad response");
-                setStatus("ok");
-                form.reset();
-              } catch (err) {
-                setStatus("err");
-              }
-            }}
+
+          <form
+            ref={formRef}
+            onSubmit={onSubmit}
             className="rounded-2xl border border-white/10 bg-white/70 dark:bg-gray-900/60 backdrop-blur p-6"
           >
-            {/* honeypot */}
-            <input type="text" name="_gotcha" className="hidden" tabIndex={-1} autoComplete="off" />
-            {/* metadata */}
-            <input type="hidden" name="_subject" value="New Support Request — yaemi.one" />
-            <input type="hidden" name="_cc" value="requests@yaemi.one" />
+            {/* Honeypot */}
+            <input type="text" name="company" className="hidden" tabIndex={-1} autoComplete="off" />
 
             <div className="mt-2">
               <label className="block text-sm">Name</label>
@@ -102,18 +109,27 @@ export default function Contact() {
 
             <button
               type="submit"
-              className="mt-6 w-full rounded-xl bg-brand-500 hover:bg-brand-600 text-white focus:outline-none focus:ring-2 focus:ring-brand-500 px-4 py-2 font-medium shadow"
+              disabled={status === "loading"}
+              className="mt-6 w-full rounded-xl bg-brand-500 hover:bg-brand-600 disabled:opacity-60 text-white focus:outline-none focus:ring-2 focus:ring-brand-500 px-4 py-2 font-medium shadow"
             >
-              Send
+              {status === "loading" ? "Sending..." : "Send"}
             </button>
-          </form>
-          {status === "ok" && (
-            <SuccessBanner kind="success" message="Thanks! Your request was received. We’ll be in touch shortly." onClose={() => setStatus(null)} />
-          )}
-          {status === "err" && (
-            <SuccessBanner kind="error" message="Something went wrong sending your request. Please try again." onClose={() => setStatus(null)} />
-          )}
 
+            {status === "ok" && (
+              <Banner
+                kind="success"
+                message="Thanks! Your message was sent. We’ll be in touch shortly."
+                onClose={() => setStatus(null)}
+              />
+            )}
+            {status === "err" && (
+              <Banner
+                kind="error"
+                message="Something went wrong. Please try again in a moment."
+                onClose={() => setStatus(null)}
+              />
+            )}
+          </form>
         </div>
       </div>
     </section>
