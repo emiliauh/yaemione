@@ -38,7 +38,7 @@ export default function Plans() {
                   </span>
                   <span className="ml-1 text-gray-400 text-sm">{p.suffix ?? "/mo"}</span>
                 </div>
-                <ul className="mt-6 space-y-2 text-sm text-gray-300 list-disc pl-5">
+                <ul className="mt-6 space-y-2 text-sm text-slate-600 dark:text-gray-300 list-disc pl-5">
                   {p.features.map((f) => <li key={f}>{f}</li>)}
                 </ul>
               </div>

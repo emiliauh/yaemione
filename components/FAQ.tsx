@@ -19,7 +19,7 @@ function Item({ q, a }: { q: string; a: string }) {
         <span className="font-medium">{q}</span>
         <ChevronDown className={`h-5 w-5 transition-transform ${open ? "rotate-180" : ""}`} />
       </button>
-      {open && <div className="px-4 pb-4 text-gray-300">{a}</div>}
+      {open && <div className="px-4 pb-4 text-slate-600 dark:text-gray-300">{a}</div>}
     </div>
   );
 }

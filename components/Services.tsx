@@ -34,7 +34,7 @@ export default function Services() {
             <div key={title} className="card p-6 hover:translate-y-[-2px] hover:shadow-soft transition">
               <Icon className="h-6 w-6 text-brand-400" />
               <h3 className="mt-4 font-semibold text-lg">{title}</h3>
-              <p className="mt-2 text-sm text-gray-300">{desc}</p>
+              <p className="mt-2 text-sm text-slate-600 dark:text-gray-300">{desc}</p>
             </div>
           ))}
         </div>
