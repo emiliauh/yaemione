@@ -22,7 +22,7 @@ export default function Hero() {
           <div className="px-6 py-12 md:px-12 md:py-16 lg:px-16 text-center">
             <p className="text-xs uppercase tracking-[0.2em] text-brand-600/90 dark:text-brand-300">Built for uptime</p>
             <h1 className="mt-3 text-3xl sm:text-4xl md:text-6xl font-extrabold tracking-tight leading-tight text-slate-900 dark:text-white">
-              High‑performance <span className="text-brand-500 drop-shadow-[0_0_18px_rgba(72,187,255,0.45)]">network</span><br className="block sm:hidden" /> infrastructure.
+              High‑performance <span className="text-brand-500 drop-shadow-[0_0_18px_rgba(72,187,255,0.45)]">network</span> infrastructure.
             </h1>
             <p className="mt-4 text-lg text-slate-700 dark:text-gray-300 max-w-3xl mx-auto">
               Speed, reliability, and capacity — delivered through premium IP transit, dedicated servers, and NVMe‑powered VPS.

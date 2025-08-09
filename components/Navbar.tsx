@@ -92,7 +92,7 @@ export default function Navbar() {
                 {l.label}
               </Link>
             ))}
-            <div className="pt-2"><ThemeToggle variant="menu" /></div>
+            <div className="pt-2"><ThemeToggle /></div>
           </div>
         </div>
       )}
