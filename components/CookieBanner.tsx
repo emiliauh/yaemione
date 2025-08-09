@@ -19,7 +19,7 @@ export default function CookieBanner() {
           <p className="text-sm text-slate-700 dark:text-gray-200">We use cookies to personalize content and analyze traffic. By using this site, you agree to our cookie policy.</p>
           <div className="flex gap-3 md:ml-auto">
             <button className="rounded-xl border border-white/10 px-3 py-2 hover:bg-white/10" onClick={() => setShow(false)}>Dismiss</button>
-            <button className="rounded-xl bg-brand-500 hover:bg-brand-400 px-3 py-2"
+            <button className="rounded-xl bg-brand-500 hover:bg-brand-400 px-3 py-2 text-white"
               onClick={() => { localStorage.setItem("yae_cookie_ok", "1"); setShow(false); }}>Accept</button>
           </div>
         </div>

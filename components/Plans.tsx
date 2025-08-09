@@ -42,7 +42,7 @@ export default function Plans() {
                   {p.features.map((f) => <li key={f}>{f}</li>)}
                 </ul>
               </div>
-              <a href={p.cta} className="mt-6 inline-flex items-center justify-center rounded-xl bg-brand-500 hover:bg-brand-400 px-4 py-2 font-medium">
+              <a href={p.cta} className="mt-6 inline-flex items-center justify-center rounded-xl bg-brand-500 hover:bg-brand-400 px-4 py-2 font-medium text-white">
                 Get Started
               </a>
             </div>
