@@ -20,13 +20,12 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
 
-  // Ensure initial state matches the actual scroll position to avoid a "fixes on scroll" bug
   useEffect(() => {
     setMounted(true);
-    const handle = () => setScrolled(window.scrollY > 8);
-    handle(); // set initial on mount
-    window.addEventListener("scroll", handle, { passive: true });
-    return () => window.removeEventListener("scroll", handle);
+    const onScroll = () => setScrolled(window.scrollY > 10);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   const activeTheme = useMemo(() => {
@@ -34,26 +33,19 @@ export default function Navbar() {
     return (theme === "system" ? systemTheme : theme) ?? "dark";
   }, [theme, systemTheme, mounted]);
 
-  // On theme changes, recompute class state by forcing a tiny state tick
-  useEffect(() => {
-    // This ensures classes depending on activeTheme update even without a scroll
-    setScrolled((s) => (typeof window !== "undefined" ? window.scrollY > 8 : s));
-  }, [activeTheme]);
+  // Invert at the top (hero is dark); once scrolled, use normal theme colors
+  const invertTop = mounted && !scrolled;
 
-  // When at top in dark mode, we want white nav text over the hero.
-  const invertTop = mounted && activeTheme === "dark" && !scrolled;
-
-  const headerBase =
-    "fixed top-0 left-0 right-0 z-50 transition-colors duration-300";
+  const headerBase = "fixed top-0 left-0 right-0 z-50 transition-colors duration-300";
   const headerStyle = scrolled
-    ? "backdrop-blur bg-white/80 dark:bg-gray-900/60 border-b border-white/20 dark:border-white/10"
+    ? "backdrop-blur bg-white/80 dark:bg-gray-900/60 border-b border-black/5 dark:border-white/10"
     : "bg-transparent border-b border-transparent";
 
   return (
     <header className={`${headerBase} ${headerStyle} ${invertTop ? "text-white" : ""}`}>
       <nav className="container-app flex items-center justify-between h-16">
         <Link href="/" className="flex items-center">
-          <Logo force={invertTop ? "dark" : undefined} />
+          <Logo force={invertTop ? "light" : undefined} />
         </Link>
 
         {/* Desktop */}
@@ -76,9 +68,11 @@ export default function Navbar() {
 
         {/* Mobile trigger */}
         <button
-          className="md:hidden inline-flex items-center justify-center h-10 w-10 rounded-xl border border-white/10 dark:border-white/10"
+          className={`md:hidden inline-flex items-center justify-center h-10 w-10 rounded-xl border ${
+            invertTop ? "border-white/30 text-white" : "border-black/10 dark:border-white/10"
+          }`}
           aria-label="Open menu"
-          onClick={() => setOpen((v) => !v)}
+          onClick={() => setOpen(v => !v)}
         >
           {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
         </button>

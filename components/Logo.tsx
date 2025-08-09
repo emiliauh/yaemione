@@ -8,10 +8,22 @@ export default function Logo({ className = "", force }: { className?: string; fo
   const { theme, systemTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
   useEffect(() => setMounted(true), []);
-  if (!mounted) return null;
+
+  // While not mounted, render a safe fallback (assume dark background => light logo)
+  if (!mounted) {
+    const fallback = (force ?? "dark") === "light" ? "/logo-dark.svg" : "/logo-light.svg";
+    return (
+      <div className={`flex items-center gap-2 ${className}`}>
+        <Image src={fallback} alt="Yaemione" width={140} height={32} priority />
+      </div>
+    );
+  }
+
   const active = (theme === "system" ? systemTheme : theme) || "dark";
   const mode = force ?? (active as "light" | "dark");
-  const src = mode === "light" ? "/logo-light.svg" : "/logo-dark.svg";
+  // Light theme => dark logo; Dark theme => light logo
+  const src = mode === "light" ? "/logo-dark.svg" : "/logo-light.svg";
+
   return (
     <div className={`flex items-center gap-2 ${className}`}>
       <Image src={src} alt="Yaemione" width={140} height={32} priority />
