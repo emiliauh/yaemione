@@ -33,7 +33,6 @@ export default function Navbar() {
     return () => window.removeEventListener("hashchange", onHash);
   }, []);
 
-  // If light theme at top, invert to white-on-dark to match hero backdrop
   const invertTop = activeTheme === "light" && !scrolled;
 
   return (
@@ -41,7 +40,7 @@ export default function Navbar() {
       className={`fixed top-0 inset-x-0 z-50 transition-all ${
         scrolled
           ? "backdrop-blur bg-white/70 dark:bg-gray-950/70 border-b border-black/10 dark:border-white/10"
-          : "bg-transparent border-b border-transparent"
+          : "bg-white/5 dark:bg-transparent border-b border-transparent"
       } ${invertTop ? "text-white" : ""}`}
     >
       <nav className="container-app flex items-center justify-between h-16">
@@ -62,9 +61,7 @@ export default function Navbar() {
               {l.label}
             </Link>
           ))}
-          <div className={invertTop ? "text-white" : ""}>
-            <ThemeToggle />
-          </div>
+          <ThemeToggle variant={invertTop ? "inverted" : "default"} />
         </div>
         <button
           className={`md:hidden inline-flex items-center justify-center h-10 w-10 rounded-lg border transition ${
