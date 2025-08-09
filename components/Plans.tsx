@@ -36,7 +36,7 @@ export default function Plans() {
                   <span className="text-4xl font-extrabold">
                     {p.name === "IP Transit" ? "$" + p.price : "$" + p.price}
                   </span>
-                  <span className="ml-1 text-gray-400 text-sm">{p.suffix or "/mo"}</span>
+                  <span className="ml-1 text-gray-400 text-sm">{p.suffix ?? "/mo"}</span>
                 </div>
                 <ul className="mt-6 space-y-2 text-sm text-gray-300 list-disc pl-5">
                   {p.features.map((f) => <li key={f}>{f}</li>)}
